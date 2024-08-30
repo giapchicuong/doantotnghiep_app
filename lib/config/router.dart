@@ -1,3 +1,6 @@
+import 'package:doantotnghiep/features/auth/bloc/auth_bloc.dart';
+import 'package:doantotnghiep/screens/home/home_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/login/login_screen.dart';
@@ -21,6 +24,9 @@ final router = GoRouter(
     if (RouteName.publicRoutes.contains(state.fullPath)) {
       return null;
     }
+    if (context.read<AuthBloc>().state is AuthAuthenticatedSuccess) {
+      return null;
+    }
     return RouteName.login;
   },
   routes: [
@@ -31,6 +37,10 @@ final router = GoRouter(
     GoRoute(
       path: RouteName.register,
       builder: (context, state) => const RegisterScreen(),
+    ),
+    GoRoute(
+      path: RouteName.home,
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

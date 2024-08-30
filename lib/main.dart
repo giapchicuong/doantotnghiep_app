@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
 
   final SharedPreferences sharedPreferences;
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
@@ -32,12 +31,37 @@ class MyApp extends StatelessWidget {
           authLocalDataSource: AuthLocalDataSource(sharedPreferences)),
       child: BlocProvider(
         create: (context) => AuthBloc(context.read<AuthRepository>()),
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: themeData,
-          routerConfig: router,
-        ),
+        child: const AppContent(),
       ),
+    );
+  }
+}
+
+class AppContent extends StatefulWidget {
+  const AppContent({super.key});
+
+  @override
+  State<AppContent> createState() => _AppContentState();
+}
+
+class _AppContentState extends State<AppContent> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthBloc>().add(AuthAuthenticatedStarted());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final authState = context.watch<AuthBloc>().state;
+    if (authState is AuthInitial) {
+      return Container();
+    }
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: themeData,
+      routerConfig: router,
     );
   }
 }

@@ -1,14 +1,14 @@
-class LoginDto {
+class RegisterDto {
   final String username;
   final String password;
 
-  const LoginDto({
+  const RegisterDto({
     required this.username,
     required this.password,
   });
 
   Map<String, dynamic> toJson() => {
-        "valueLogin": username,
+        "email": username,
         "password": password,
       };
 }

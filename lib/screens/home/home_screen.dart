@@ -24,10 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _handleNewPostButton(BuildContext context) {
     final bloc = PostCreateBloc();
-    _postCreateBlocs.add(bloc);
+    setState(() {
+      _postCreateBlocs.add(bloc);
+    });
     bloc.stream.listen((state) {
       if (state is PostCreateSuccess) {
-        _postCreateBlocs.remove(bloc);
+        setState(() {
+          _postCreateBlocs.remove(bloc);
+        });
+
         bloc.close();
       }
     });

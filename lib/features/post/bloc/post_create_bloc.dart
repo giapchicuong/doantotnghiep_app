@@ -15,14 +15,14 @@ class PostCreateBloc extends Bloc<PostCreateEvent, PostCreateState> {
       content: event.content,
     ));
 
-    await Future.delayed(const Duration(seconds: 2));
-    // emit(PostCreateSuccess());
+    await Future.delayed(const Duration(seconds: 5));
+    emit(PostCreateSuccess());
 
-    emit(PostCreateFailure(
-      title: event.title,
-      content: event.content,
-      error: 'Network error',
-    ));
+    // emit(PostCreateFailure(
+    //   title: event.title,
+    //   content: event.content,
+    //   error: 'Network error',
+    // ));
   }
 
   void _onPostCreateRetryStarted(

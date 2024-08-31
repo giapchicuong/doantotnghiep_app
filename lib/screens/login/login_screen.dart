@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
     context.read<AuthBloc>().add(AuthStarted());
   }
 
-  _buildInitialLoginWidget() {
+  Widget _buildInitialLoginWidget() {
     return AutofillGroup(
       child: Form(
         key: _formKey,

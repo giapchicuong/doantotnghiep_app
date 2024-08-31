@@ -52,6 +52,7 @@ class _PostCreateScreenState extends State<PostCreateScreen> {
         fontSize: 20,
       ),
     );
+
     final contextField = TextField(
       controller: _contentController,
       maxLines: 1000,
